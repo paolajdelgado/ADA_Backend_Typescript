@@ -8,4 +8,5 @@ console.log(variableAny);
 
 variableAny = "Cambiando de valor";
 console.log(variableAny);
+console.log(variableAny);
 
