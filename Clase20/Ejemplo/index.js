@@ -62,7 +62,7 @@ app.post('/productos', auth, (req, res) =>{
     try{
         const nuevoProducto = productoSchema.parse(req.body) //validando con zod
         productos.push(nuevoProducto)
-        res.status(201).json('Nuevo producto creado: ', nuevoProducto)
+        res.status(201).json({message: 'Nuevo producto creado', producto: nuevoProducto})
     } catch (err) {
         res.status(400).json({error: err.errors})
     }
