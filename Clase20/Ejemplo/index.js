@@ -36,7 +36,7 @@ function auth(req, res, next) {
 
 
 //Esquema ZOD
-const producoSchema = z.object({
+const productoSchema = z.object({
     name: z.string().min(2),
     price: z.number().positive(),
 })
@@ -44,7 +44,7 @@ const producoSchema = z.object({
 //Ruta publica para el login
 app.post('/login', (req, res) =>{
     const {email, password} = req.body
-    if(email === user.email && password === user.password){
+    if (email === user.email && password === user.password) {
         const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: '1h'})
         res.json({token})
     } else {
@@ -60,7 +60,7 @@ app.get('/productos', auth, (req, res) =>{
 //Ruta protegida para agregar productos validados
 app.post('/productos', auth, (req, res) =>{
     try{
-        const nuevoProducto = producoSchema.parse(req.body) //validando con zod
+        const nuevoProducto = productoSchema.parse(req.body) //validando con zod
         productos.push(nuevoProducto)
         res.status(201).json('Nuevo producto creado: ', nuevoProducto)
     } catch (err) {
